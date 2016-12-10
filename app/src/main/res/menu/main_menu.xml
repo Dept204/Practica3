@@ -3,6 +3,6 @@
     <item
         android:id="@+id/graphics"
         android:title="Gráficas Órdenes"
-        android:onClick="summonGraficas"
+        android:onClick="summonOrdenes"
         />
 </menu>
