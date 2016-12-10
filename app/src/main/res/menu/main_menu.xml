@@ -5,4 +5,10 @@
         android:title="Gráficas Órdenes"
         android:onClick="summonOrdenes"
         />
+
+    <item
+        android:id="@+id/cupons"
+        android:title="Mis Cupones"
+        android:onClick="summonCupones"
+        />
 </menu>

@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView txtEmail;
     private TextView txtRol;
     private ImageView img;
+    private UserData user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Gson gson = new Gson();
-        UserData user = gson.fromJson(intent.getStringExtra("User"),UserData.class);
+        user = gson.fromJson(intent.getStringExtra("User"),UserData.class);
 
         txtUsername = (TextView) findViewById(R.id.txtUsername);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
@@ -71,5 +72,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void summonOrdenes(MenuItem item) {
         Toast.makeText(getApplicationContext(), "Sheet", Toast.LENGTH_LONG).show();
+    }
+
+    public void summonCupones(MenuItem item) {
+        Intent intent = new Intent(this,CouponActivity.class);
+        intent.putExtra("email", user.getUser().getEmail());
+        startActivity(intent);
+
     }
 }

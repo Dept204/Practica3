@@ -120,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                                 openProfile(response);
                             }else{
                                 //error
-                                Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
+                                showProgress(false);
+                                mUserText.setError(getString(R.string.error_field_required));
                             }
                         }
                     },

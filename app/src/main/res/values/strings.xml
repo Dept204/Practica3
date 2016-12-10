@@ -11,4 +11,5 @@
     <string name="error_incorrect_password">Password incorrecto</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_coupons">Coupons</string>
 </resources>
