@@ -28,6 +28,7 @@
             android:name=".CouponActivity"
             android:label="@string/title_activity_coupons"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".OrdersActivity"></activity>
     </application>
 
 </manifest>

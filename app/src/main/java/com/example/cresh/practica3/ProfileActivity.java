@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private long user_id;
     private TextView txtUsername;
     private TextView txtEmail;
     private TextView txtRol;
@@ -55,6 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
         txtEmail.setText(user.getUser().getEmail());
         txtRol.setText(user.getRol());
 
+        user_id = user.getId();
+
         String image = user.getUser().getAvatar();
         int start = image.indexOf("src=\'") + 5;
         int end = image.indexOf("\'", image.indexOf("src=\'") + 5);
@@ -71,7 +74,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void summonOrdenes(MenuItem item) {
-        Toast.makeText(getApplicationContext(), "Sheet", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, OrdersActivity.class);
+        intent.putExtra("uid", user_id);
+        startActivity(intent);
     }
 
     public void summonCupones(MenuItem item) {
