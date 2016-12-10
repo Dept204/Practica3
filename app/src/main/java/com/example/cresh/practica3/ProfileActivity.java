@@ -1,5 +1,6 @@
 package com.example.cresh.practica3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,9 +10,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.cresh.practica3.pojo.UserData;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private TextView txtUsername;
+    private TextView txtEmail;
+    private TextView txtRol;
+    private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +40,26 @@ public class ProfileActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Intent intent = getIntent();
+        Gson gson = new Gson();
+        UserData user = gson.fromJson(intent.getStringExtra("User"),UserData.class);
+
+        txtUsername = (TextView) findViewById(R.id.txtUsername);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtRol = (TextView) findViewById(R.id.txtRol);
+        img = (ImageView) findViewById(R.id.imgUser);
+
+        txtUsername.setText(user.getNombre_completo());
+        txtEmail.setText(user.getUser().getEmail());
+        txtRol.setText(user.getRol());
+
+        String image = user.getUser().getAvatar();
+        int start = image.indexOf("src=\'") + 5;
+        int end = image.indexOf("\'", image.indexOf("src=\'") + 5);
+
+        String src = image.substring(start, end);
+        Picasso.with(getApplicationContext()).load(src).into(img);
     }
 
     @Override
