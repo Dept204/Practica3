@@ -7,6 +7,11 @@ import android.widget.Toast;
 import com.example.cresh.practica3.api.ServiceGenerator;
 import com.example.cresh.practica3.interfaces.WoocommerceRequest;
 import com.example.cresh.practica3.pojo.Orders;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import java.io.IOException;
 
@@ -23,6 +28,8 @@ public class OrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
+        final BarChart chart = (BarChart) findViewById(R.id.bar_chart);
+
         // Set Title
         setTitle("Gráficas");
 
@@ -34,6 +41,10 @@ public class OrdersActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Orders> call, Response<Orders> response) {
                 Orders body = response.body();
+                BarDataSet dataSet = new BarDataSet(body.getChartData(),"Dinero");
+                BarData data = new BarData(dataSet);
+                chart.setData(data);
+                chart.invalidate();
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
             }
 
