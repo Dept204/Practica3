@@ -3,6 +3,7 @@ package com.example.cresh.practica3;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -37,11 +38,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cresh.practica3.pojo.UserData;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -130,9 +134,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             //todo check
-                            if(response.trim().equals("success")){
-                                openProfile();
+                            Gson gson = new Gson();
+                            UserData user = gson.fromJson(response, UserData.class);
+                            if(Objects.equals(user.getValido(), "true")){
+                                openProfile(response);
                             }else{
+                                //error
                                 Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
                             }
                         }
@@ -163,11 +170,10 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() > 4;
     }
 
-    private void openProfile(){
-//        Intent intent = new Intent(this, ActivityUserProfile.class);
-//        intent.putExtra(KEY_USERNAME, username);
-//        startActivity(intent);
-        Toast.makeText(getApplicationContext(),"Buen Login",Toast.LENGTH_LONG).show();
+    private void openProfile(String response){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("User", response);
+        startActivity(intent);
     }
 
     /**
