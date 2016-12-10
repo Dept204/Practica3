@@ -5,13 +5,14 @@ package com.example.cresh.practica3.pojo;
  */
 
 public final class UserData {
+
     private final String valido;
     public final long id;
     private final String nombre_completo;
     private final String rol;
     private final User user;
 
-    public UserData(String valido, long id, String nombre_completo, String rol, User user){
+    public UserData(String valido, long id, String nombre_completo, String rol, User user) {
         this.valido = valido;
         this.id = id;
         this.nombre_completo = nombre_completo;
@@ -35,6 +36,8 @@ public final class UserData {
         return rol;
     }
 
+    public long getId() { return id; }
+
     public static final class User {
         private final String first_name;
         private final String last_name;
@@ -42,7 +45,7 @@ public final class UserData {
         private final String[] roles;
         private final String avatar;
 
-        public User(String first_name, String last_name, String email, String[] roles, String avatar){
+        public User(String first_name, String last_name, String email, String[] roles, String avatar) {
             this.first_name = first_name;
             this.last_name = last_name;
             this.email = email;
